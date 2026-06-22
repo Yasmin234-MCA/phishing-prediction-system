@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Email Prediction History</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Background with gradient overlay */
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url("{{ url_for('static', filename='img/gradient.png') }}") no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(0, 0, 0, 0.6), rgba(30, 60, 114, 0.7), rgba(42, 82, 152, 0.6));
+      background-size: 400% 400%;
+      animation: gradientMove 12s ease infinite;
+      z-index: -1;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Card with glassmorphism */
+    .card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+      width: 90%;
+      max-width: 900px;
+      z-index: 1;
+      text-align: center;
+    }
+
+    /* Gradient animated heading */
+    h2 {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(270deg, #00c6ff, #2a5298, #1e3c72, #00c6ff);
+      background-size: 600% 600%;
+       background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      animation: gradientText 12s ease infinite;
+    }
+
+    @keyframes gradientText {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    th {
+      background: linear-gradient(90deg, #00c6ff, #2a5298);
+      color: white;
+      font-weight: 600;
+    }
+
+    /* Badges with gradient */
+    .badge {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-weight: bold;
+      background: linear-gradient(90deg, #00c6ff, #2a5298);
+      color: white;
+      display: inline-block;
+    }
+    .green { background: linear-gradient(90deg, #28a745, #5dd36b); }
+    .orange { background: linear-gradient(90deg, #fd7e14, #ffb347); }
+    .red { background: linear-gradient(90deg, #dc3545, #ff6b6b); }
+
+    /* Progress Bar */
+    .bar {
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      overflow: hidden;
+      height: 20px;
+      width: 100%;
+    }
+    .fill {
+      height: 100%;
+      text-align: center;
+      line-height: 20px;
+      font-size: 12px;
+      color: white;
+      font-weight: bold;
+    }
+    .fill.green { background: linear-gradient(90deg, #28a745, #5dd36b); }
+    .fill.orange { background: linear-gradient(90deg, #fd7e14, #ffb347); }
+    .fill.red { background: linear-gradient(90deg, #dc3545, #ff6b6b); }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      background: linear-gradient(90deg, #00c6ff, #2a5298);
+      color: white;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+
+    p {
+      font-size: 18px;
+      color: rgba(255,255,255,0.8);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Email Prediction History</h2>
+
+    {% if logs %}
+      <table>
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Result</th>
+            <th>Confidence</th>
+            <th>Predicted At</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for email, prediction, confidence, predicted_at in logs %}
+          <tr>
+            <td>{{ email }}</td>
+            <td>
+              <span class="badge 
+                {% if prediction == 'Safe' %}green{% elif prediction == 'Medium Risk' %}orange{% else %}red{% endif %}">
+                {{ prediction }}
+              </span>
+            </td>
+            <td>
+              <div class="bar">
+                <div class="fill 
+                  {% if prediction == 'Safe' %}green{% elif prediction == 'Medium Risk' %}orange{% else %}red{% endif %}" 
+                  style="width:  {{ confidence }}%">
+                  {{ confidence }}%
+                </div>
+              </div>
+            </td>
+            <td>{{ predicted_at }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No prediction history found.</p>
+    {% endif %}
+
+    <div style="text-align: center;">
+      <a href="/" class="btn">🏠 Back to Home</a>
+      <a href="/logout" class="btn">🔒 Logout</a>
+    </div>
+  </div>
+</body>
+</html>
+

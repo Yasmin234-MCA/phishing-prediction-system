@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Phishing Prediction Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: url("{{ url_for('static', filename='img/gradient.png') }}") no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+      color: white;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(0,0,0,0.6), rgba(30,60,114,0.7), rgba(42,82,152,0.6));
+      background-size: 400% 400%;
+      animation: gradientMove 12s ease infinite;
+      z-index: -1;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .card {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(15px);
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+      width: 400px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(270deg,#00c6ff,#2a5298,#1e3c72,#00c6ff);
+      background-size: 600% 600%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      animation: gradientText 8s ease infinite;
+    }
+
+    @keyframes gradientText {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    p {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    .bar {
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      overflow: hidden;
+      height: 25px;
+      margin: 15px 0;
+    }
+
+    .fill {
+      height: 100%;
+      text-align: center;
+      line-height: 25px;
+      font-size: 14px;
+      font-weight: bold;
+      color: white;
+      border-radius: 20px;
+      transition: width 0.5s ease;
+    }
+
+    .fill.green {
+      background: linear-gradient(90deg,#28a745,#5dd36b);
+    }
+
+    .fill.orange {
+      background: linear-gradient(90deg,#fd7e14,#ffb347);
+    }
+
+    .fill.red {
+      background: linear-gradient(90deg,#dc3545,#ff6b6b);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      background: linear-gradient(90deg,#00c6ff,#2a5298);
+      color: white;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .result-icon {
+      font-size: 50px;
+      margin: 10px 0;
+    }
+
+    .safe {
+      color: #28a745;
+    }
+
+    .medium {
+      color: #fd7e14;
+    }
+
+    .high {
+      color: #dc3545;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h2>Phishing Prediction Result</h2>
+
+    <p><strong>Email:</strong> {{ email }}</p>
+
+    {% if result == "Safe" %}
+      <div class="result-icon safe">✔️</div>
+    {% elif result == "Medium Risk" %}
+      <div class="result-icon medium">⚠️</div>
+    {% else %}
+      <div class="result-icon high">❌</div>
+    {% endif %}
+
+    <p><strong>Result:</strong> {{ result }}</p>
+    <p>{{ risk_message }}</p>
+
+    <!-- Correct Confidence Bar -->
+    <div class="bar">
+      <div class="fill {{ color }}" style="width: {{ confidence }}%;"></div>
+    </div>
+    <p><strong>Confidence:</strong> {{ confidence }}%</p>
+
+    <a href="/" class="btn">🔍 Check Another</a>
+    <a href="/history" class="btn">📜 View History</a>
+    <a href="/logout" class="btn">🔒 Logout</a>
+  </div>
+</body>
+
+</html>
