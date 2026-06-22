@@ -1,38 +1,70 @@
-# phishing-prediction-system
-Deep Learning based phishing prediction system 
+# 🛡️ Phishing Prediction System
 
-A machine learning-based system to detect and classify phishing emails as **legitimate or phishing**.
+## 📖 About Project
 
-##  Overview
-This project analyzes email content using ML algorithms to predict whether an email is a phishing attempt or a legitimate one — helping users stay safe from cyber threats.
+The Phishing Prediction System is a 🤖 Deep Learning-based web application designed to detect and classify phishing emails as legitimate or malicious. The system helps users identify potential cyber threats and improve online security.
 
-##  Features
-- 📧 Detects phishing emails with high accuracy
-- 🤖 Machine learning-powered classification
-- 📊 Visual results and prediction output
-- ⚡ Fast and easy to use
+## ✨ Features
 
-##  Tech Stack
-- **Language:** Python
-- **Libraries:** scikit-learn, pandas, numpy, matplotlib, seaborn
-- **Model:** Deep Learning (COnvolutional Neural Network)
-- **Frontend:** Flask 
+* 📧 Detects phishing emails with high accuracy
+* 🤖 Deep Learning-powered classification
+* 📊 Displays prediction results and analysis
+* ⚡ Fast and user-friendly web interface
+* 🔒 Helps improve cybersecurity awareness
 
-## Project Structure
+## 🛠️ Tech Stack
+
+* 🐍 Language: Python
+* 📚 Libraries: scikit-learn, pandas, numpy, matplotlib
+* 🧠 Model: Convolutional Neural Network (CNN)
+* 🌐 Framework: Flask
+* 💾 Database: MySQL
+* 🎨 Frontend: HTML, CSS
+
+## 🚀 Project Highlights
+
+* 🤖 Developed a Deep Learning-based phishing email detection system.
+* 📧 Implemented feature extraction and email classification techniques.
+* 🌐 Built a web application using Flask for real-time predictions.
+* 🔒 Improved cybersecurity awareness through automated phishing detection.
+
+## 📚 Challenges & Learnings
+
+* ⚡ Improved model accuracy by reducing false predictions.
+* 🧹 Learned data preprocessing and feature extraction techniques.
+* 🧠 Gained hands-on experience in CNN model training and optimization.
+* 🔍 Enhanced understanding of machine learning workflows and cybersecurity concepts.
+
+## 📂 Project Structure
+
 phishing-prediction-system/
 
 ├── dataset/              # Email dataset (CSV)
-├── model/                # Saved trained model (.pkl)
+├── model/                # Trained model files
 ├── static/               # CSS, images, screenshots
-│   └── screenshots/      # 📸 App screenshots
-├── templates/            # HTML templates (if Flask)
-├── app.py                # Main application
+├── templates/            # HTML templates
+├── app.py                # Main Flask application
 ├── train.py              # Model training script
-├── requirements.txt      # Dependencies
+├── requirements.txt      # Project dependencies
 └── README.md
 
 ## ▶️ How to Run
-1. Clone the repo
-2. Install dependencies → `pip install -r requirements.txt`
-3. Run the app → `python app.py`
-4. Open browser → `http://localhost:5000`
+
+1. 📥 Clone the repository
+2. 📦 Install dependencies:
+   pip install -r requirements.txt
+3. ▶️ Run the application:
+   python app.py
+4. 🌐 Open:
+   http://localhost:5000
+
+## 🔮 Future Enhancements
+
+* 📈 Improve model accuracy with larger datasets
+* 🌍 Multi-language phishing detection
+* ☁️ Cloud deployment support
+* 📱 Mobile-friendly interface
+* 🔐 Advanced threat detection features
+
+
+
