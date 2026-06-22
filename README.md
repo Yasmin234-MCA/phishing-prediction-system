@@ -14,12 +14,12 @@ The Phishing Prediction System is a 🤖 Deep Learning-based web application des
 
 ## 🛠️ Tech Stack
 
-*    Language: Python
-* 📚 Libraries: scikit-learn, pandas, numpy, matplotlib
-*     Model: Convolutional Neural Network (CNN)
-* 🌐 Framework: Flask
-* 💾 Database: MySQL
-* 🎨 Frontend: HTML, CSS
+* Language: Python
+* Libraries: scikit-learn, pandas, numpy, matplotlib
+* Model: Convolutional Neural Network (CNN)
+* Framework: Flask
+* Database: MySQL
+* Frontend: HTML, CSS , JavaScript
 
 ## 🚀 Project Highlights
 
